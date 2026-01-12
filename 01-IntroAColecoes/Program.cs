@@ -40,12 +40,30 @@ var carrinho = new List<Produto>()
 
 var diasDaSemana = new DiasDaSemana();
 
-foreach (string item in diasDaSemana)
-{
-    Console.WriteLine(item);
-}
+
 
 //PercorrendoComForEach();
+//PercorrendoComEnumerator();
+PercorrendoDiasComForEach();
+
+void PercorrendoComEnumerator()
+{
+    Console.WriteLine("-----------------------------------------------");
+    var enumerator = diasDaSemana.GetEnumerator();
+    while (enumerator.MoveNext())
+    {
+        var dia = enumerator.Current;
+        Console.WriteLine(dia);
+    }
+}
+
+void PercorrendoDiasComForEach()
+{
+    foreach (string item in diasDaSemana)
+    {
+        Console.WriteLine(item);
+    }
+}
 
 void PercorrendoComFor()
 {
@@ -111,7 +129,13 @@ class DiasDaSemana : IEnumerable<string>
 {
     public IEnumerator<string> GetEnumerator()
     {
-        return new DiasDaSemanaEnumerator();
+        yield return "Domingo";
+        yield return "Segunda-feira";
+        yield return "Terça-feira";
+        yield return "Quarta-feira";
+        yield return "Quinta-feira";
+        yield return "Sexta-feira";
+        yield return "Sábado";
     }
 
     IEnumerator IEnumerable.GetEnumerator()
